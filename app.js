@@ -1,4 +1,7 @@
-require('dotenv').config();
+const dotenv = require('dotenv')
+
+dotenv.config();
+dotenv.config({path: __dirname + '/.env.private'});
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');

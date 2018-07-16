@@ -5,9 +5,11 @@ const userSchema = new Schema({
   username: String,
   password: String,
   isAdmin: Boolean,
+  slackID: String,
   role: [{
     type: String,
     enum : ['GUEST', 'EDITOR', 'ADMIN'],
+    default:'GUEST'
   }]
 }, {
   timestamps: {
