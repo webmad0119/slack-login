@@ -20,7 +20,6 @@ router.post('/signup', (req, res, next) => {
       username
     })
     .then(user => {
-      console.log(user);
       if (user !== null) {
         throw new Error("Username Already exists");
       }
@@ -39,7 +38,6 @@ router.post('/signup', (req, res, next) => {
       res.redirect("/");
     })
     .catch(err => {
-      console.log(err);
       res.render("auth/signup", {
         errorMessage: err.message
       });
@@ -59,12 +57,18 @@ router.post("/login", passport.authenticate("local", {
   })
 )
 
-router.get("/slack", passport.authenticate("slack"));
+// OAuth callback url
+router.get('/slack/callback', 
+  passport.authenticate('slack', { failureRedirect: '/login' }),
+  (req, res) => {
+    res.redirect('/')
+  }
+);
 
-router.get("/slack/callback", passport.authenticate("slack", {
-  successRedirect: "/",
-  failureRedirect: "/"
-}));
+// path to start the OAuth flow
+router.get('/slack', passport.authenticate('slack'), (req, res, next) => {
+  next()
+});
 
 router.get('/logout' , (req,res) => {
   req.logout();

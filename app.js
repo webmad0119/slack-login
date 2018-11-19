@@ -33,12 +33,12 @@ const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.
 const app = express();
 
 // Middleware Setup
-app.use(logger('dev'));
-app.use(bodyParser.json());
+// app.use(logger('dev'));
+// app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
 }));
-app.use(cookieParser());
+// app.use(cookieParser());
 app.use(session({
   secret: "basic-auth-secret",
   cookie: { maxAge: 60000 },
@@ -74,9 +74,7 @@ app.use((req,res,next) => {
   res.locals.user = req.user;
   res.locals.message = req.flash("error");
   next();
-}) 
-
-
+})
 
 const authRouter = require('./routes/authRouter');
 app.use('/auth', authRouter);

@@ -6,7 +6,6 @@ passport.use(new SlackStrategy({
     clientID: process.env.SLACK_CLIENT_ID,
     clientSecret: process.env.SLACK_CLIENT_SECRET
 }, (accessToken, refreshToken, profile, done) => {
-    console.log(profile);
     User.findOne({
             slackID: profile.id
         })
