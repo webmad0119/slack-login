@@ -1,4 +1,6 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
-
-<h1>YOU ARE  {{user.username}}</h1>
+{{#if user.username}}
+<h1>According to Slack you are  "{{user.username}}"</h1>
+{{else}}
+<h1>Welcome to the social login with Slack</h1>
+<h3>Please login using the login link</h3>
+{{/if}}
